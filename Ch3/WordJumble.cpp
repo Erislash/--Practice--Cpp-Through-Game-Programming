@@ -24,6 +24,7 @@ int main(void) {
     int choice = (rand() % NUM_WORDS);
     string word = WORDS[choice][WORD];
     string hint = WORDS[choice][HINT];
+    int score = 0;
 
     string jumble = word;
     unsigned short int length = jumble.size();
@@ -49,13 +50,13 @@ int main(void) {
 
 
     while ((input != word) && (input != "quit")){
-        if (input == "hint") cout << hint;
-        else cout << "Sorry, that's not it.";
+        if (input == "hint"){cout << hint; score -= word.size() / 2;}
+        else {score--; cout << "Sorry, that's not it.";}
         cout <<"\n\nYour guess: ";
         cin >> input;
     }
 
-    if (input == word) cout << "\nThat's it! You guessed it!\n";
+    if (input == word) {score += word.size(); cout << "\nThat's it! You guessed it!\nScore: "<<score; }
     cout << "\nThanks for playing.\n";
 
     return 0;
